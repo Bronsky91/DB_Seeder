@@ -31,5 +31,5 @@ api_calls = {
     'Seminars': redtail.create_seminar
 }
 api_call = api_calls[data_type]
-# Create loop using data_volume as iteration counter that calls Redtail API to create data. Sleep 100ms between calls. 
+# Create loop using data_volume integer as iteration counter that calls Redtail API to create data. Sleep 100ms between calls. 
 # api_call(headers)
