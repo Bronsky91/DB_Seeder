@@ -1,2 +1,6 @@
 
 redtail\.py
+
+*.pyc
+
+__pycache__/

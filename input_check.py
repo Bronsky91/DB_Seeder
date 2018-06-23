@@ -6,7 +6,7 @@ def get_int(prompt):
             print("Integers only, try again")
             continue
 
-        if len(value) > 4:
+        if len(str(value)) > 4:
             print("Too large of number, keep under 1000")
             continue
         else:
