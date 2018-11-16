@@ -11,20 +11,26 @@ def basic_contact_info(mccl_codes, csl_codes):
         "Firstname": name_data['first_name'],
         "Gender": name_data['gender'],
         "Lastname": name_data['last_name'],
-        "Middlename": name_data['middle_init'],
         "StatusID": status_code(csl_codes),
         "TaxID": tax_id(),
+        "MaritalStatus": martial(),
         "TypeID":"I"
     }
     return contact_profile
 
 
+def martial():
+    martial_choices = ['Married', 'Divorced', 'Single']
+    return martial_choices[random.randrange(0,2)]
+
+
 def basic_address(client_id):
+    region_data = region()
     address_data = {
         "Address1": street_address(),
-        "City": city(),
+        "City": region_data['city'],
         "ClientID": client_id,
-        "State": state(),
+        "State": region_data['state'],
         "TypeID": address_type_id(),
         "Zip": zip()
     }
@@ -46,7 +52,7 @@ def basic_internet(client_id, first_name, last_name):
         "ClientID": client_id,
         "TypeID": 1
     }
-
+    return email_data
 
 def category_code(mccl_codes):
     return mccl_codes[random.randrange(0, len(mccl_codes)-1)]
@@ -63,11 +69,10 @@ def date_of_birth():
 
 def name_and_gender():
     r = requests.get('https://uinames.com/api/?region=united states')
-    user_data = json.loads(r.text)
+    user_data = r.json()
     details = {
         'first_name': str(user_data['name']),
         'last_name': str(user_data['surname']),
-        'middle_init': chr(random.randrange(65, 65 + 26 + 1)),
         'gender': str(user_data['gender'])
     }
     return details
@@ -88,7 +93,7 @@ def phone_number_type_id():
 
 def phone_number():
     area_code = str(random.randrange(201,998))
-    return area_code + str(random.randrange(1000,9999))
+    return area_code + str(random.randrange(1000000,9999999))
 
 
 def street_address():
@@ -101,15 +106,12 @@ def street_address():
     address = "{} {} {} {}".format(res_number, directions[random.randrange(0,3)], street_name, suffix[random.randrange(0,5)])
     return address
 
-        
-def city():
-    cities = ['Phoenix','Sacramento','Atlanta']
-    return cities[random.randrange(0,2)]
 
-
-def state():
+def region():
     states = ['AZ','CA','GA']
-    return states[random.randrange(0,2)]
+    cities = ['Phoenix','Sacramento','Atlanta']
+    region = random.randrange(0,2)
+    return {'city': cities[region], 'state': states[region]}
 
 
 def address_type_id():
