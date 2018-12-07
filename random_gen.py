@@ -110,7 +110,7 @@ def street_address():
 def region():
     states = ['AZ','CA','GA']
     cities = ['Phoenix','Sacramento','Atlanta']
-    region = random.randrange(0,2)
+    region = random.randrange(0,3)
     return {'city': cities[region], 'state': states[region]}
 
 
