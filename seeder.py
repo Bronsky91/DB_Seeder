@@ -111,7 +111,7 @@ class ApiCall:
                         self.headers, client
                     )] = client
                 # Loop that addes in Phone, Address, and Email data for each contact
-                for c_id, value in contacts.iteritems():
+                for c_id, value in contacts.items():
                     ApiCall.prod_api_calls['Address'](self.headers, random_gen.basic_address(c_id))
                     ApiCall.prod_api_calls['Internet'](self.headers, random_gen.basic_internet(
                         c_id, value['Firstname'], value['Lastname']))

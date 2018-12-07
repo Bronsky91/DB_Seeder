@@ -6,9 +6,11 @@ api_key = 'DA353598-8FF5-4DBF-B153-8B2EE3A22D3E'
 
 
 def headers(rt_un, rt_pw):
+    encoded_string = '{}:{}:{}'.format(api_key, rt_un, rt_pw)
+    encoded_string = encoded_string.encode('ascii')
     headers = {
         'content-type': 'application/json', 'authorization': 'Basic ' +
-        base64.b64encode('{}:{}:{}'.format(api_key, rt_un, rt_pw))
+        base64.b64encode(encoded_string).decode("utf-8") 
     }
     return headers
 
